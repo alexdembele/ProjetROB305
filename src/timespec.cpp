@@ -111,11 +111,3 @@ bool operator> (const timespec& time1_ts, const timespec& time2_ts) {
 
 
 
-int main()
-{
-    struct timespec abstime = timespec_from_ms((double)1234);
-    
-    std::cout << "secondes: " << abstime.tv_sec << std::endl;
-    std::cout << "nanosecondes: " << abstime.tv_nsec << std::endl;
-    return 0;
-}
