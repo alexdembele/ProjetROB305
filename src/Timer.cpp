@@ -43,6 +43,7 @@ void Timer::stop()
 
 void Timer::call_callback(int /*sig*/, siginfo_t * si, void*)
 {
-    
+    Timer* pTimer = (Timer*)si->si_value.sival_ptr;
+    pTimer->callback();
 }
 
