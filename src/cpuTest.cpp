@@ -3,7 +3,10 @@
 #include <cstdlib>
 #include <time.h>
 #include <string>
+<<<<<<< HEAD
 #include <pthread.h>
+=======
+>>>>>>> ac18d14d3c73c9c28209ab8155d79efb7532586d
 #include "../inc/timespec.hpp"
 struct Data 
 {
