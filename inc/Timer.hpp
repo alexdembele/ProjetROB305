@@ -39,9 +39,11 @@ class PeriodicTimer:  public  Timer
             struct itimerspec its;
             its.it_value=timespec_from_ms(interval_ms);
             its.it_interval=timespec_from_ms(interval_ms);
-
+            std::cout << "startPeriodic"  << std::endl;
             timer_settime(tid, 0, &its, nullptr);
         };
+
+
        
         
 };
@@ -65,14 +67,13 @@ public:
         startPeriodic(1000);
     }
 
-    void callback()
+    virtual void callback () override
     {
         if(Count >0)
         {
             std::cout << "Compteur" << Count << std::endl;
             Count--;
-
-            
+                    
         }
         else
         {

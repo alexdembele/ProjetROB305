@@ -56,14 +56,17 @@ void Timer::call_callback(int /*sig*/, siginfo_t * si, void*)
 
 int main()
 {
-    std::cout << "Yousk1" << std::endl;
+    
     CountDown countdown(5);
-    std::cout << "Yousk2" << std::endl;
+    
     // Démarrage du compte à rebours
     countdown.startCountDown();
-    std::cout << "Yousk3" << std::endl;
-    
-    std::cout << "Yousk4" << std::endl;
+    for(int i=0; i<30; i++)
+    {
+        std::cout << "Yousk" << std::endl;
+        std::this_thread::sleep_for(std::chrono::seconds(5));
+        std::cout << "Yousk" << std::endl;
+    }
     
     
     return 0;
