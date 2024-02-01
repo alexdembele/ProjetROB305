@@ -3,10 +3,8 @@
 #include <cstdlib>
 #include <time.h>
 #include <string>
-<<<<<<< HEAD
 #include <pthread.h>
-=======
->>>>>>> ac18d14d3c73c9c28209ab8155d79efb7532586d
+#include <vector>
 #include "../inc/timespec.hpp"
 struct Data 
 {
@@ -78,14 +76,14 @@ int main(int argc, char* argv[])
     
     
     unsigned long nLoops = (unsigned long)std::atoi(argv[1]);
-    unsigned int nTasks = (unsigned int)std::atoi(argv[2]);
+    
 
     Data data = {  0.0 , nLoops, protec};
     pthread_mutex_init(&data.mutex, nullptr);
-    pthread_t incrementThread[nTasks];
-    for(int i=0;i<nTasks;i++)
+    std::vector<pthread_t> incrementThread(std::atoi(argv[2]));
+    for(auto& thid :incrementThread )
     {
-        pthread_create(&incrementThread[i], nullptr, call_incr, &data);
+        pthread_create(&thid, nullptr, call_incr, &data);
     }
     
     /*timespec a = timespec_now();
@@ -97,9 +95,9 @@ int main(int argc, char* argv[])
     double temps_exec = timespec_to_ms(c);*/
     
     
-    for (int i=0; i<3; ++i) 
+    for(auto& thid :incrementThread )
     {
-        pthread_join(incrementThread[i], nullptr);
+        pthread_join(thid, nullptr);
     }
     pthread_mutex_destroy(&data.mutex);
     std::cout << "Valeur finale du counter : " << data.counter << std::endl;
