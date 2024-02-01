@@ -18,7 +18,7 @@ Timer::Timer()
 
     sev.sigev_notify = SIGEV_SIGNAL;
     sev.sigev_signo = SIGRTMIN;
-    sev.sigev_value.sival_ptr =  (void*) &tid;
+    sev.sigev_value.sival_ptr =  (void*) this;
 
     timer_create(CLOCK_REALTIME, &sev, &tid);
 }
@@ -54,19 +54,53 @@ void Timer::call_callback(int /*sig*/, siginfo_t * si, void*)
     pTimer->callback();
 }
 
+void PeriodicTimer::startPeriodic(double interval_ms)
+{
+    struct itimerspec its;
+    its.it_value=timespec_from_ms(interval_ms);
+    its.it_interval=timespec_from_ms(interval_ms);
+    std::cout << "startPeriodic"  << std::endl;
+    timer_settime(tid, 0, &its, nullptr);
+}
+
+CountDown::CountDown(int initialValue)
+{
+    Count = initialValue;
+}
+
+void CountDown::startCountDown()
+{
+    // Appelle la fonction startPeriodic avec la valeur initiale
+    startPeriodic(1000);
+}
+
+void CountDown::callback() 
+{
+    if(Count >0)
+    {
+        std::cout << "Compteur : " << Count << std::endl;
+        Count--;
+                
+    }
+    else
+    {
+        stop();
+    }
+}
+
+
 int main()
 {
-    
-    CountDown countdown(5);
+    int nSecond = 10;
+    CountDown countdown(nSecond);
     
     // Démarrage du compte à rebours
     countdown.startCountDown();
-    for(int i=0; i<30; i++)
-    {
-        std::cout << "Yousk" << std::endl;
-        std::this_thread::sleep_for(std::chrono::seconds(5));
-        std::cout << "Yousk" << std::endl;
-    }
+    
+        
+    std::this_thread::sleep_for(std::chrono::seconds(nSecond+1));
+        
+    
     
     
     return 0;
