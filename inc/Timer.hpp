@@ -18,69 +18,26 @@ class Timer
         virtual ~Timer();
         void start(double duration_ms);
         void stop();
-        
 
     private:
         static void call_callback(int sig, siginfo_t * si, void*);
-        
-        
-
-
 };
 
 class PeriodicTimer:  public  Timer
 {
-   
-    public:
-
-        
-        void startPeriodic(double interval_ms) 
-        {
-            struct itimerspec its;
-            its.it_value=timespec_from_ms(interval_ms);
-            its.it_interval=timespec_from_ms(interval_ms);
-            std::cout << "startPeriodic"  << std::endl;
-            timer_settime(tid, 0, &its, nullptr);
-        };
-
-
-       
-        
+    public:        
+        void startPeriodic(double interval_ms) ;    
 };
 
-class CountDown : public PeriodicTimer {
+class CountDown : public PeriodicTimer 
+{
     private:
         int Count;
-public:
-    
-    
-    CountDown(int initialValue) 
-    {
-        Count = initialValue;
-    };
-
-    
-
-    // Fonction pour démarrer le compte à rebours
-    void startCountDown() {
-        // Appelle la fonction startPeriodic avec la valeur initiale
-        startPeriodic(1000);
-    }
-
-    virtual void callback () override
-    {
-        if(Count >0)
-        {
-            std::cout << "Compteur" << Count << std::endl;
-            Count--;
-                    
-        }
-        else
-        {
-            stop();
-        }
-    }
-    
+    public:
+        CountDown(int initialValue) ;
+        // Fonction pour démarrer le compte à rebours
+        void startCountDown(); 
+        virtual void callback () override;
 };
 
 
