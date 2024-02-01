@@ -1,3 +1,7 @@
 # ProjetROB305
- 
-Compilation avec g++ ../projetROB305/*.cpp -lrt dans un ../build
+
+Il faut créer un dossier build parallèle à ce dossier  
+cd ../  
+mkdir build  
+cd build  
+Compilation avec g++ ../projetROB305/*.cpp -lrt -lpthread dans un ../build
