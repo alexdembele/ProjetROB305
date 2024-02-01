@@ -80,6 +80,7 @@ int main(int argc, char* argv[])
 
     Data data = {  0.0 , nLoops, protec};
     pthread_mutex_init(&data.mutex, nullptr);
+    timespec a = timespec_now();
     std::vector<pthread_t> incrementThread(std::atoi(argv[2]));
     for(auto& thid :incrementThread )
     {
@@ -100,8 +101,13 @@ int main(int argc, char* argv[])
         pthread_join(thid, nullptr);
     }
     pthread_mutex_destroy(&data.mutex);
+    timespec b = timespec_now();
+    timespec c =b-a;
+
+    double temps_exec = timespec_to_ms(c);
+
     std::cout << "Valeur finale du counter : " << data.counter << std::endl;
-    //std::cout << "temps d'exécution : " << temps_exec<< " ms" << std::endl;
+    std::cout << "temps d'exécution : " << temps_exec<< " ms" << std::endl;
 
     return 0 ;
 }
