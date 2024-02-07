@@ -34,7 +34,6 @@ void Timer::start(double duration_ms)
     struct itimerspec its;
     its.it_value=timespec_from_ms(duration_ms);
     its.it_interval=timespec_from_ms(0);
-
     timer_settime(tid, 0, &its, nullptr);
 }
 
@@ -44,8 +43,6 @@ void Timer::stop()
     struct itimerspec its;
     its.it_value=timespec_from_ms(0);
     its.it_interval=timespec_from_ms(0);
-
-    
 }
 
 void Timer::call_callback(int /*sig*/, siginfo_t * si, void*)
@@ -59,7 +56,6 @@ void PeriodicTimer::startPeriodic(double interval_ms)
     struct itimerspec its;
     its.it_value=timespec_from_ms(interval_ms);
     its.it_interval=timespec_from_ms(interval_ms);
-    std::cout << "startPeriodic"  << std::endl;
     timer_settime(tid, 0, &its, nullptr);
 }
 
@@ -79,8 +75,7 @@ void CountDown::callback()
     if(Count >0)
     {
         std::cout << "Compteur : " << Count << std::endl;
-        Count--;
-                
+        Count--;         
     }
     else
     {
@@ -93,15 +88,8 @@ int main()
 {
     int nSecond = 10;
     CountDown countdown(nSecond);
-    
     // Démarrage du compte à rebours
     countdown.startCountDown();
-    
-        
     std::this_thread::sleep_for(std::chrono::seconds(nSecond+1));
-        
-    
-    
-    
     return 0;
 }

@@ -8,7 +8,6 @@
 #include "../inc/timespec.hpp"
 struct Data 
 {
-    
     volatile double  counter;
     unsigned long nLoops;
     bool protection;
@@ -18,6 +17,7 @@ struct Data
 
 void incr(unsigned long nLoops, double* pCounter,pthread_mutex_t* mutex, bool protection)
 {
+    //verification du fonctionnement en mutex ou non
     if(protection)
     {
         for(unsigned int u=0; u< nLoops; u++)
@@ -34,12 +34,11 @@ void incr(unsigned long nLoops, double* pCounter,pthread_mutex_t* mutex, bool pr
             *pCounter+=1;
         }
     }
-
 }
+
 void* call_incr(void* v_data)
 {
     Data* p_data = (Data*) v_data;
-
     incr(p_data->nLoops, (double *)&p_data->counter,&p_data->mutex,p_data->protection);
     return v_data;
 }
@@ -74,10 +73,7 @@ int main(int argc, char* argv[])
         protec=false;
     }
     
-    
     unsigned long nLoops = (unsigned long)std::atoi(argv[1]);
-    
-
     Data data = {  0.0 , nLoops, protec};
     pthread_mutex_init(&data.mutex, nullptr);
     timespec a = timespec_now();

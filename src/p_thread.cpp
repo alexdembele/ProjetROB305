@@ -29,7 +29,6 @@ int main(int argc, char* argv[])
     Data data = { false, 0.0 };
     pthread_t incrementThread;
     
-
     pthread_create(&incrementThread, nullptr, incrementer, &data);
     for (char cmd = 'r'; cmd != 's'; std::cin >> cmd)
     {
