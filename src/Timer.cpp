@@ -84,10 +84,16 @@ void CountDown::callback()
 }
 
 
-int main()
+int main(int argc, char* argv[])
 {
     int nSecond = 10;
+
+    if(argc >1) 
+    {
+        nSecond = (int) std::atoi(argv[1]);
+    }
     CountDown countdown(nSecond);
+    
     // Démarrage du compte à rebours
     countdown.startCountDown();
     std::this_thread::sleep_for(std::chrono::seconds(nSecond+1));

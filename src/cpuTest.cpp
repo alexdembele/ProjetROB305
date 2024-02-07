@@ -48,7 +48,7 @@ void* call_incr(void* v_data)
 
 int main(int argc, char* argv[])
 {
-    bool protec;
+    bool protec; //determine le mode de fonctionnement
     if (argc != 4 && argc !=3) 
     {
         std::cerr << "Usage: " << argv[0] << " <nombre_entier> <nombre de tâche> (<protected>)" << std::endl;
@@ -100,10 +100,10 @@ int main(int argc, char* argv[])
     timespec b = timespec_now();
     timespec c =b-a;
 
-    double temps_exec = timespec_to_ms(c);
+    double temps_exec = timespec_to_ms(c)/1000; //on divise par 1000 pour cenvertir en s
 
     std::cout << "Valeur finale du counter : " << data.counter << std::endl;
-    std::cout << "temps d'exécution : " << temps_exec<< " ms" << std::endl;
+    std::cout << "temps d'exécution : " << temps_exec<< " s" << std::endl;
 
     return 0 ;
 }

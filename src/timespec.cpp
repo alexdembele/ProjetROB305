@@ -27,16 +27,18 @@ timespec timespec_now()
 }
 
 timespec timespec_negate(const timespec& time_ts) {
-    timespec result;
-    result.tv_sec = -time_ts.tv_sec;
-    result.tv_nsec = -time_ts.tv_nsec;
 
+    timespec result;
+    int sec = -time_ts.tv_sec;
+    int nsec = -time_ts.tv_nsec;
     // Gestion des nanosecondes qui doivent être positives
-    if (result.tv_nsec < 0) 
+    if (nsec < 0) 
     {
-        result.tv_sec -= 1;
-        result.tv_nsec += 1e9;
+        sec -= 1;
+        nsec += 1e9;
     }
+    result.tv_sec= sec;
+    result.tv_nsec= nsec;
 
     return result;
 }
@@ -44,16 +46,18 @@ timespec timespec_negate(const timespec& time_ts) {
 
 timespec timespec_add(const timespec& time1_ts, const timespec& time2_ts) 
 {
-    timespec result;
-    result.tv_sec = time1_ts.tv_sec + time2_ts.tv_sec;
-    result.tv_nsec = time1_ts.tv_nsec + time2_ts.tv_nsec;
-    
+    int sec = time1_ts.tv_sec + time2_ts.tv_sec;
+    int nsec = time1_ts.tv_nsec + time2_ts.tv_nsec; 
+
     //gestion des nanosecondes qui peuvent depasser la seconde
-    if (result.tv_nsec >= 1e9) 
+    if (nsec >= 1e9) 
     {
-        result.tv_sec += 1;
-        result.tv_nsec -= 1e9;
+        sec += 1;
+        nsec -= 1e9;
     }
+    timespec result;
+    result.tv_sec= sec;
+    result.tv_nsec= nsec;
 
     return result;
 }
