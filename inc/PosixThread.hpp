@@ -38,7 +38,7 @@ class Thread : public PosixThread
         void* run(void* v_thread);
     
     private:
-        static void* call_run();
+        static void* call_run(void* thread);
     
     public:
         static void sleep_ms(double delay_ms);

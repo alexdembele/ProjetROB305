@@ -3,7 +3,9 @@
 #include "../inc/timespec.hpp"
 #include "../inc/Mutex.hpp"
 
-
+// =========================================
+// Classe Mutex
+// =========================================
 
 Mutex::Mutex()
 {
@@ -13,30 +15,6 @@ Mutex::Mutex()
 Mutex::~Mutex()
 {
     pthread_mutex_destroy(&posixMutexId);
-}
-
-
-Mutex::Monitor::Monitor(Mutex& mtx) : mutex(mtx)
-{
-    pthread_cond_init(&mutex.posixCondId, nullptr);
-}
-
-Mutex::Lock::Lock(Mutex& mtx) :  Monitor(mtx)
-{
-    mutex.lock();
-}
-
-Mutex::Lock::Lock(Mutex& mtx, double timeout_ms) : Monitor(mtx)
-{
-    if (!mutex.lock(timeout_ms)) 
-    {
-        throw TimeoutException();
-    }
-}
-
-Mutex::Lock::~Lock()
-{
-    mutex.unlock();
 }
 
 void Mutex::lock() 
@@ -63,6 +41,14 @@ void Mutex::unlock()
     pthread_mutex_unlock(&posixMutexId);
 }
 
+// =========================================
+// Classe Monitor
+// =========================================
+
+Mutex::Monitor::Monitor(Mutex& mtx) : mutex(mtx)
+{
+    pthread_cond_init(&mutex.posixCondId, nullptr);
+}
 
 void Mutex::Monitor::wait()
 {
@@ -94,9 +80,56 @@ void Mutex::Monitor::notifyAll()
 }
 
 
-int main()
+// =========================================
+// Classe Lock
+// =========================================
+Mutex::Lock::Lock(Mutex& mtx) :  Monitor(mtx)
 {
-    std::cout << "Yousk2" <<std::endl;
-    return 0;
+    mutex.lock();
 }
+
+Mutex::Lock::Lock(Mutex& mtx, double timeout_ms) : Monitor(mtx)
+{
+    if (!mutex.lock(timeout_ms)) 
+    {
+        throw TimeoutException();
+    }
+}
+
+Mutex::Lock::~Lock()
+{
+    mutex.unlock();
+}
+
+
+
+// =========================================
+// Classe Semaphore
+// =========================================
+
+Semaphore::Semaphore(unsigned int initCount = 0, unsigned int countMax = 10)
+{
+    counter = initCount;
+    maxCount = countMax;
+}
+
+void Semaphore::give()
+{
+
+}
+
+void Semaphore::take()
+{
+
+}
+
+bool Semaphore::take(double timeout_ms)
+{
+
+}
+
+
+// =========================================
+// Classe Fifo
+// =========================================
 

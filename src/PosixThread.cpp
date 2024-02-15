@@ -5,6 +5,10 @@
 #include "../inc/timespec.hpp"
 #include "../inc/PosixThread.hpp"
 
+
+// =========================================
+// Posixthread
+// =========================================
 PosixThread::PosixThread(): posixId(0),isActive(false)
 {
     pthread_attr_init(&posixAttr);
@@ -92,6 +96,9 @@ bool PosixThread::getSchedunling(int* p_schedPolicy, int* p_priority)
     return true;   
 }
 
+// =========================================
+// Classe Thread
+// =========================================
 Thread::Thread()
 {
 
@@ -101,22 +108,21 @@ Thread::~Thread()
 {
     
 }
+
 void Thread::start()
 {
-    PosixThread::start(&Thread::call_run, this);
+    PosixThread::start(&Thread::call_run(), this);
 }
 
 void* Thread::run(void* v_thread) 
 {
-    Thread* thread = static_cast<Thread*>(v_thread);
-    thread->run();
     return NULL;
 }
 
-void* Thread::call_run() 
+void* Thread::call_run(void* thread) 
 {
-    run(this);
-    return NULL;
+    Thread* myTHread = (Thread*)thread;
+    return myThread->run(thread);
 }
 
 double Thread::startTime_ms()
@@ -132,6 +138,8 @@ double Thread::stopTime_ms()
     clock_gettime(CLOCK_REALTIME, &abstime);
     return timespec_to_ms(abstime);
 }
+
+
 
 
 int main()

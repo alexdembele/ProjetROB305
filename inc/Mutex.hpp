@@ -3,6 +3,7 @@
 
 #include <pthread.h>
 #include <stdexcept>
+#include <queue>
 
 class Mutex
 {
@@ -30,6 +31,14 @@ public:
     TimeoutException() : std::runtime_error("Timeout occurred while waiting for lock") {}
 };
 
+class EmptyException : public std::out_of_range
+{
+public:
+    EmptyException() : std::out_of_range("Fifo is empty") {}
+};
+
+
+
 class Mutex::Monitor
 {
     public:
@@ -52,5 +61,41 @@ class Mutex::Lock : public Mutex::Monitor
         ~Lock();
 
 
+};
+
+class Semaphore: public Mutex
+{
+    private:
+        unsigned int counter;
+        unsigned int maxCount;
+    
+    public:
+        Semaphore(unsigned int initCount = 0, unsigned int countMax = 10);
+        void give();
+        void take();
+        bool take(double timeout_ms);
+};
+
+template <typename T>
+class Fifo: public Mutex
+{
+    private:
+        std::queue<T> elements;
+    
+    public:
+        void push(T element) 
+        {
+        // mutex
+        // elements.push(element);
+        }
+        T pop()
+        {
+
+        }
+
+        T pop(double timeout_ms)
+        {
+
+        }
 };
 #endif
