@@ -101,7 +101,7 @@ bool PosixThread::getSchedunling(int* p_schedPolicy, int* p_priority)
 // =========================================
 Thread::Thread()
 {
-
+    
 }
 
 Thread::~Thread()
@@ -111,32 +111,31 @@ Thread::~Thread()
 
 void Thread::start()
 {
-    PosixThread::start(&Thread::call_run(), this);
-}
-
-void* Thread::run(void* v_thread) 
-{
-    return NULL;
+    startTime = timespec_now();
+    PosixThread::start(&call_run, this);
 }
 
 void* Thread::call_run(void* thread) 
 {
-    Thread* myTHread = (Thread*)thread;
-    return myThread->run(thread);
+    Thread* theThread = (Thread*)thread;
+    theThread->run(thread);
+    theThread->stopTime = timespec_now();
+    return nullptr;
 }
 
 double Thread::startTime_ms()
 {
-    struct timespec abstime;
-    clock_gettime(CLOCK_REALTIME, &abstime);
-    return timespec_to_ms(abstime);
+    return timespec_to_ms(startTime);
 }
 
 double Thread::stopTime_ms()
 {
-    struct timespec abstime;
-    clock_gettime(CLOCK_REALTIME, &abstime);
-    return timespec_to_ms(abstime);
+    return timespec_to_ms(stopTime);
+}
+
+double Thread::execTime_ms()
+{
+    return stopTime_ms()-startTime_ms();
 }
 
 

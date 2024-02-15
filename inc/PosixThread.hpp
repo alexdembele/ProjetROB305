@@ -31,14 +31,18 @@ class Thread : public PosixThread
 {
     public:
         Thread();
-        ~Thread();
+        virtual ~Thread();
         void start();
     
     protected:
-        void* run(void* v_thread);
+        virtual void* run(void* v_thread) = 0;
     
-    private:
+    protected:
         static void* call_run(void* thread);
+
+    private:
+        timespec startTime;
+        timespec stopTime;
     
     public:
         static void sleep_ms(double delay_ms);
