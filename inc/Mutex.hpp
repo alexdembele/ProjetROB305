@@ -4,6 +4,7 @@
 #include <pthread.h>
 #include <stdexcept>
 #include <queue>
+#include <climits>
 
 class Mutex
 {
@@ -70,10 +71,11 @@ class Semaphore: public Mutex
         unsigned int maxCount;
     
     public:
-        Semaphore(unsigned int initCount = 0, unsigned int countMax = 10);
+        Semaphore(unsigned int initCount, unsigned int maxCount =UINT_MAX): counter(initCount), maxCount(maxCount) {};
         void give();
         void take();
         bool take(double timeout_ms);
+        unsigned int getCounter();
 };
 
 template <typename T>

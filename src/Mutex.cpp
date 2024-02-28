@@ -1,5 +1,6 @@
 #include <iostream>
 #include <pthread.h>
+#include <climits>
 #include "../inc/timespec.hpp"
 #include "../inc/Mutex.hpp"
 
@@ -107,29 +108,49 @@ Mutex::Lock::~Lock()
 // Classe Semaphore
 // =========================================
 
-Semaphore::Semaphore(unsigned int initCount = 0, unsigned int countMax = 10)
+void Semaphore::take() 
 {
-    counter = initCount;
-    maxCount = countMax;
+    Mutex::Lock lock(*this); // Acquire lock for thread safety
+    while (counter == 0)// Wait while counter is zero
+    { 
+        lock.wait();
+    }
+    --counter; // Decrement the counter
 }
 
-void Semaphore::give()
+void Semaphore::give() 
 {
-
-}
-
-void Semaphore::take()
-{
-
-}
-
-bool Semaphore::take(double timeout_ms)
-{
-
+    Mutex::Lock lock(*this); // Acquire lock for thread safety
+    if (counter < maxCount)
+    {
+        ++counter; // Increment the counter
+    }
+    
 }
 
 
-// =========================================
-// Classe Fifo
-// =========================================
+bool Semaphore::take(double timeout_ms) 
+{
+    Mutex::Lock lock(*this); // Acquire lock for thread safety
+    timespec ts;
+    clock_gettime(CLOCK_REALTIME, &ts);
+    ts += timespec_from_ms(timeout_ms);
+
+    while (counter == 0) 
+    {
+        if (!lock.wait(timeout_ms))
+        { 
+            return false;
+        }
+    }
+    --counter; 
+    return true;
+}
+
+unsigned int Semaphore::getCounter()
+{
+    return counter;
+}
+
+
 
