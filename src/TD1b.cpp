@@ -32,9 +32,7 @@ int main()
     struct sigevent sev;
     timer_t timerid;
     struct itimerspec its;
-    //struct timespec ts;
 
-    // Configurer le gestionnaire de signal pour SIGALRM
     sa.sa_flags = SA_SIGINFO;
     sa.sa_sigaction = timer_handler;
     sigemptyset(&sa.sa_mask);
@@ -44,7 +42,6 @@ int main()
         exit(EXIT_FAILURE);
     }
 
-    // Créer le timer POSIX
     sev.sigev_notify = SIGEV_SIGNAL;
     sev.sigev_signo = SIGALRM;
     sev.sigev_value.sival_ptr = &timerid;
@@ -53,8 +50,6 @@ int main()
         perror("timer_create");
         exit(EXIT_FAILURE);
     }
-
-    // Configurer l'intervalle du timer
     
     its.it_value = timespec_from_ms(INTERVAL_MS);
     its.it_interval = timespec_from_ms(INTERVAL_MS);
@@ -66,7 +61,6 @@ int main()
         exit(EXIT_FAILURE);
     }
 
-    // Attendre jusqu'à la fin du timer
     while (1) 
     {
         pause();

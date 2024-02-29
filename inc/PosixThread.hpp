@@ -26,7 +26,6 @@ class PosixThread
         bool getSchedunling(int* p_schedPolicy, int* p_priority);
 };
 
-
 class Thread : public PosixThread
 {
     public:
@@ -49,8 +48,6 @@ class Thread : public PosixThread
         double startTime_ms();
         double stopTime_ms();
         double execTime_ms();
-
 };
-
 
 #endif

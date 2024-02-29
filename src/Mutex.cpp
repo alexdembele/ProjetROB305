@@ -110,28 +110,26 @@ Mutex::Lock::~Lock()
 
 void Semaphore::take() 
 {
-    Mutex::Lock lock(*this); // Acquire lock for thread safety
-    while (counter == 0)// Wait while counter is zero
+    Mutex::Lock lock(*this); 
+    while (counter == 0)
     { 
         lock.wait();
     }
-    --counter; // Decrement the counter
+    --counter; 
 }
 
 void Semaphore::give() 
 {
-    Mutex::Lock lock(*this); // Acquire lock for thread safety
+    Mutex::Lock lock(*this); 
     if (counter < maxCount)
     {
-        ++counter; // Increment the counter
+        ++counter;
     }
-    
 }
-
 
 bool Semaphore::take(double timeout_ms) 
 {
-    Mutex::Lock lock(*this); // Acquire lock for thread safety
+    Mutex::Lock lock(*this); 
     timespec ts;
     clock_gettime(CLOCK_REALTIME, &ts);
     ts += timespec_from_ms(timeout_ms);

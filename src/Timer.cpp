@@ -39,7 +39,7 @@ void Timer::start(double duration_ms)
 
 void Timer::stop()
 {
-    // Désarmement de la minuterie
+    
     struct itimerspec its;
     its.it_value=timespec_from_ms(0);
     its.it_interval=timespec_from_ms(0);
@@ -81,21 +81,4 @@ void CountDown::callback()
     {
         stop();
     }
-}
-
-
-int main(int argc, char* argv[])
-{
-    int nSecond = 10;
-
-    if(argc >1) 
-    {
-        nSecond = (int) std::atoi(argv[1]);
-    }
-    CountDown countdown(nSecond);
-    
-    // Démarrage du compte à rebours
-    countdown.startCountDown();
-    std::this_thread::sleep_for(std::chrono::seconds(nSecond+1));
-    return 0;
 }

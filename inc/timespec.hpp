@@ -1,7 +1,6 @@
 #ifndef timespec_h_INCLUDED
 #define timespec_h_INCLUDED
 
-
 #include <iostream>
 
 double timespec_to_ms(const timespec& time_ts);

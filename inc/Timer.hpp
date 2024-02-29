@@ -40,5 +40,4 @@ class CountDown : public PeriodicTimer
         virtual void callback () override;
 };
 
-
 #endif

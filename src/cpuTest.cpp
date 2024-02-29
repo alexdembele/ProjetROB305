@@ -6,6 +6,7 @@
 #include <pthread.h>
 #include <vector>
 #include "../inc/timespec.hpp"
+
 struct Data 
 {
     volatile double  counter;
@@ -13,7 +14,6 @@ struct Data
     bool protection;
     pthread_mutex_t mutex;
 };
-
 
 void incr(unsigned long nLoops, double* pCounter,pthread_mutex_t* mutex, bool protection)
 {
@@ -42,9 +42,6 @@ void* call_incr(void* v_data)
     incr(p_data->nLoops, (double *)&p_data->counter,&p_data->mutex,p_data->protection);
     return v_data;
 }
-
-
-
 
 int main(int argc, char* argv[])
 {
@@ -82,15 +79,6 @@ int main(int argc, char* argv[])
     {
         pthread_create(&thid, nullptr, call_incr, &data);
     }
-    
-    /*timespec a = timespec_now();
-    incr(nLoops, &counter);
-    timespec b = timespec_now();
-
-    timespec c =b-a;
-
-    double temps_exec = timespec_to_ms(c);*/
-    
     
     for(auto& thid :incrementThread )
     {

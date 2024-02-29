@@ -17,8 +17,6 @@ class Chrono
         void restart();
         bool isActive();
         double lap();
-
-
 };
 
 #endif

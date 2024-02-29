@@ -26,9 +26,6 @@ PosixThread::PosixThread(pthread_t posixId): posixId(posixId),isActive(true)
     }
     pthread_attr_setschedpolicy(&posixAttr,policy);
     pthread_attr_setschedparam(&posixAttr, &schedp);
-
-
-
 }
 
 PosixThread::~PosixThread()
@@ -111,8 +108,11 @@ Thread::~Thread()
 
 void Thread::start()
 {
-    startTime = timespec_now();
-    PosixThread::start(&call_run, this);
+    if(!isActive)
+    {
+        startTime = timespec_now();
+        PosixThread::start(&call_run, this); 
+    }
 }
 
 void* Thread::call_run(void* thread) 
@@ -138,11 +138,13 @@ double Thread::execTime_ms()
     return stopTime_ms()-startTime_ms();
 }
 
-
-
-
-int main()
+void Thread::sleep_ms(double delay_ms) 
 {
-    return 0;
+    std::this_thread::sleep_for(std::chrono::milliseconds(static_cast<long>(delay_ms)));
 }
+
+
+
+
+
 

@@ -13,7 +13,6 @@ struct Data
     volatile double counter;
 };
 
-
 void* incrementer(void* v_data) 
 {
     Data* p_data = (Data*) v_data;
