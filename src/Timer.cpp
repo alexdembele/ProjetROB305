@@ -4,8 +4,15 @@
 #include <chrono>
 #include <cstring>
 #include <iostream>
+#include <vector>
+#include <cfloat>
 #include "../inc/Timer.hpp"
 #include "../inc/timespec.hpp"
+
+
+// =========================================
+// Classe Timer
+// =========================================
 
 Timer::Timer()
 {
@@ -39,10 +46,8 @@ void Timer::start(double duration_ms)
 
 void Timer::stop()
 {
-    
-    struct itimerspec its;
-    its.it_value=timespec_from_ms(0);
-    its.it_interval=timespec_from_ms(0);
+    struct itimerspec its = {{0,0} , {0,0}};
+    timer_settime(tid, 0, &its, nullptr);
 }
 
 void Timer::call_callback(int /*sig*/, siginfo_t * si, void*)
@@ -51,6 +56,10 @@ void Timer::call_callback(int /*sig*/, siginfo_t * si, void*)
     pTimer->callback();
 }
 
+// =========================================
+// Classe PeridodicTimer
+// =========================================
+
 void PeriodicTimer::startPeriodic(double interval_ms)
 {
     struct itimerspec its;
@@ -58,6 +67,10 @@ void PeriodicTimer::startPeriodic(double interval_ms)
     its.it_interval=timespec_from_ms(interval_ms);
     timer_settime(tid, 0, &its, nullptr);
 }
+
+// =========================================
+// Classe Countdown
+// =========================================
 
 CountDown::CountDown(int initialValue)
 {
@@ -82,3 +95,7 @@ void CountDown::callback()
         stop();
     }
 }
+
+
+
+

@@ -4,6 +4,8 @@
 #include <time.h>
 #include <signal.h>
 #include <iostream>
+#include <vector>
+#include <cfloat>
 #include "../inc/timespec.hpp"
 
 
@@ -39,5 +41,7 @@ class CountDown : public PeriodicTimer
         void startCountDown(); 
         virtual void callback () override;
 };
+
+
 
 #endif
