@@ -36,7 +36,7 @@ PosixThread::~PosixThread()
 void PosixThread::start(void* (*threadFunc) (void*) , void* threadArg)
 {
     isActive=true;
-    pthread_create(&posixId, &posixAttr, threadFunc, &threadArg);
+    pthread_create(&posixId, &posixAttr, threadFunc, threadArg);
 }
 
 void PosixThread::join()
@@ -118,7 +118,7 @@ void Thread::start()
 void* Thread::call_run(void* thread) 
 {
     Thread* theThread = (Thread*)thread;
-    theThread->run(thread);
+    theThread->run();
     theThread->stopTime = timespec_now();
     return nullptr;
 }

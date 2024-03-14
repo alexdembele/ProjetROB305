@@ -12,6 +12,7 @@ struct Data
     bool protection;
     Mutex mutex; 
 };
+// classe derive de thread pour savoir si il y a section critique et savoir si l'on se trouve avant apres ou pendant, instancier 3 tâches
 
 // Fonction exécutée par chaque thread
 void cpuIntensiveTask() 
@@ -23,19 +24,31 @@ void cpuIntensiveTask()
     }
 }
 
-void A()
+void inc(unsigned long duration_ms ,double* pCounter, Mutex& mutex, bool protected)
 {
+    if (protection) 
+    {
+        for (unsigned int u = 0; u < nLoops; u++) 
+        {
+            Mutex::Lock lock(mutex);
+            *pCounter += 1;
+        }
+    }
+    else 
+    {
+        for (unsigned int u = 0; u < nLoops; u++) 
+        {
+            *pCounter += 1;
+        }
+    }
 
 }
 
-void B()
+void* call_incr(void* v_data) 
 {
-
-}
-
-void C()
-{
-
+    Data* p_data = (Data*)v_data;
+    incr(p_data->nLoops, (double*)&p_data->counter, p_data->mutex, p_data->protection);
+    return v_data;
 }
 
 //tick en 100 ms
@@ -47,6 +60,9 @@ int main()
     //Calibration
     Calibrator myCalibrator(200,10);
     CpuLoop myLoop(myCalibrator);
+    Data dataA = {0.0, nLoops, protec};
+    Data dataB = {0.0, nLoops, protec};
+    Data dataC = {0.0, nLoops, protec};
 
     
 

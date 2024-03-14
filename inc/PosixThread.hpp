@@ -34,7 +34,7 @@ class Thread : public PosixThread
         void start();
     
     protected:
-        virtual void* run(void* v_thread) = 0;
+        virtual void run() = 0;
     
     protected:
         static void* call_run(void* thread);

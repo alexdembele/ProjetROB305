@@ -7,15 +7,14 @@
 class TestThread : public Thread 
 {
 protected:
-    virtual void* run(void* v_thread) 
+    void run() override
     {
         
         for (int i = 0; i < 5; ++i) 
         {
             std::cout << "Thread is running..." << std::endl;
-            Thread::sleep_ms(1000); 
+            timespec_wait(timespec_from_ms(2000));
         }
-        return nullptr;
     }
 };
 
@@ -26,7 +25,8 @@ int main() {
     testThread.start();
     std::cout << "Yousk2"<<std::endl;
     
-    Thread::sleep_ms(7000); 
+    //Thread::sleep_ms(7000);
+    timespec_wait(timespec_from_ms(11000));
     std::cout << "Yousk2"<<std::endl;
     
     std::cout << "Execution time of the thread: " << testThread.execTime_ms() << " milliseconds" << std::endl;
