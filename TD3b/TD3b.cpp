@@ -19,6 +19,7 @@ int main(int argc, char* argv[])
     
     // Démarrage du compte à rebours
     countdown.startCountDown();
-    std::this_thread::sleep_for(std::chrono::seconds(nSecond+1));
+    //On laisse le temps à l'autre thread de s'exécuter
+    std::this_thread::sleep_for(std::chrono::seconds(nSecond+3));
     return 0;
 }

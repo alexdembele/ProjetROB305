@@ -54,7 +54,6 @@ int main()
     its.it_value = timespec_from_ms(INTERVAL_MS);
     its.it_interval = timespec_from_ms(INTERVAL_MS);
     
-
     if (timer_settime(timerid, 0, &its, NULL) == -1) 
     {
         perror("timer_settime");
