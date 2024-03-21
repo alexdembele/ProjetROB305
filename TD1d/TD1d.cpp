@@ -58,7 +58,9 @@ void* call_timer(void* v_data)
 }
 
 
-
+// =========================================
+// Fonction pour calibration
+// =========================================
 void calib(double* a, double* b)
 {
     unsigned long nLoops = (unsigned long)UINT_MAX;
@@ -100,6 +102,8 @@ void calib(double* a, double* b)
     *a = (finalValue2-finalValue1)/(temps_exec2-temps_exec1);
     *b = finalValue1-(*a * temps_exec1);
 }
+
+
 
 
 
