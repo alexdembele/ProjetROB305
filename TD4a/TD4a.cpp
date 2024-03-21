@@ -18,18 +18,12 @@ protected:
     }
 };
 
-int main() {
-   
+int main() 
+{
     TestThread testThread;
-    
     testThread.start();
-    std::cout << "Yousk2"<<std::endl;
-    
-    timespec_wait(timespec_from_ms(11000));
-    std::cout << "Yousk2"<<std::endl;
-    
+    timespec_wait(timespec_from_ms(11000));    
     std::cout << "Execution time of the thread: " << testThread.execTime_ms() << " milliseconds" << std::endl;
-
     testThread.join();
 
     return 0;
