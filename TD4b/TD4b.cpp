@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstring>
 #include <vector>
-#include "../inc/timespec.hpp"
+#include "../inc/timespec.h"
 #include "../inc/Mutex.hpp" 
 struct Data 
 {

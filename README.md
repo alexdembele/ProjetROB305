@@ -1,5 +1,8 @@
 # ProjetROB305
 
+***Auteur***
+Alex Dembélé
+
 ***Compilation*** 
 
 Cloner ce projet dans un dossier

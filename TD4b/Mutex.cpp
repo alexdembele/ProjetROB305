@@ -1,7 +1,7 @@
 #include <iostream>
 #include <pthread.h>
 #include <climits>
-#include "../inc/timespec.hpp"
+#include "../inc/timespec.h"
 #include "../inc/Mutex.hpp"
 
 // =========================================

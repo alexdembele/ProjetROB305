@@ -2,8 +2,8 @@
 #include <signal.h>
 #include <thread>
 #include <pthread.h>
-#include "../inc/timespec.hpp"
-#include "../inc/PosixThread.hpp"
+#include "../inc/timespec.h"
+#include "../inc/PosixThread.h"
 
 
 // =========================================
@@ -53,7 +53,7 @@ bool PosixThread::join(double timeout_ms)
     if (isActive) 
     {
         struct timespec ts;
-        clock_gettime(CLOCK_REALTIME, &ts);
+        timespec_now();
         ts+= timespec_from_ms(timeout_ms);
 
         int ret = pthread_timedjoin_np(posixId, NULL, &ts);

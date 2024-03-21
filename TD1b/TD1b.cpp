@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <signal.h>
 #include <unistd.h>
-#include "../inc/timespec.hpp"
+#include "../inc/timespec.h"
 
 #define INTERVAL_MS 500 // 2 Hz en microsecondes
 

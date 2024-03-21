@@ -2,7 +2,7 @@
 #include <iostream>
 #include <cassert>
 #include <cmath>
-#include "../inc/timespec.hpp"
+#include "../inc/timespec.h"
 
 
 int main()

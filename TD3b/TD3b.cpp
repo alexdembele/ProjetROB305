@@ -4,8 +4,8 @@
 #include <chrono>
 #include <cstring>
 #include <iostream>
-#include "../inc/Timer.hpp"
-#include "../inc/timespec.hpp"
+#include "../inc/Timer.h"
+#include "../inc/timespec.h"
 
 int main(int argc, char* argv[])
 {

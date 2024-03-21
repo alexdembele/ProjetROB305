@@ -4,9 +4,9 @@
 #include <chrono>
 #include <cstring>
 #include <iostream>
-#include "../inc/cpuLoop.hpp"
-#include "../inc/timespec.hpp"
-#include "../inc/Chrono.hpp"
+#include "../inc/cpuLoop.h"
+#include "../inc/timespec.h"
+#include "../inc/Chrono.h"
 
 int main()
 {

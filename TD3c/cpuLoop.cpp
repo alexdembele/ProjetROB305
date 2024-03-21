@@ -1,7 +1,7 @@
 #include <iostream>
 #include <time.h>
-#include "../inc/cpuLoop.hpp"
-#include "../inc/timespec.hpp"
+#include "../inc/cpuLoop.h"
+#include "../inc/timespec.h"
 
 
 // =========================================

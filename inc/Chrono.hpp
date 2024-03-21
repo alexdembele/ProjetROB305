@@ -3,7 +3,7 @@
 
 #include <time.h>
 #include <iostream>
-#include "../inc/timespec.hpp"
+#include "../inc/timespec.h"
 
 class Chrono
 {

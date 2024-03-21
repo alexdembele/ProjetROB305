@@ -2,8 +2,8 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
-#include "../inc/timespec.hpp"
-#include "../inc/Chrono.hpp"
+#include "../inc/timespec.h"
+#include "../inc/Chrono.h"
 
 int main(int argc, char* argv[])
 {

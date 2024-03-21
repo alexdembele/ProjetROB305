@@ -1,7 +1,7 @@
 #include <iostream>
 #include <chrono>
-#include "../inc/timespec.hpp"
-#include "../inc/PosixThread.hpp"
+#include "../inc/timespec.h"
+#include "../inc/PosixThread.h"
 
 
 class TestThread : public Thread 
@@ -25,7 +25,6 @@ int main() {
     testThread.start();
     std::cout << "Yousk2"<<std::endl;
     
-    //Thread::sleep_ms(7000);
     timespec_wait(timespec_from_ms(11000));
     std::cout << "Yousk2"<<std::endl;
     

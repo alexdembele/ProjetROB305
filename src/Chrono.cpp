@@ -1,7 +1,7 @@
 #include <time.h>
 #include <iostream>
-#include "../inc/timespec.hpp"
-#include "../inc/Chrono.hpp"
+#include "../inc/timespec.h"
+#include "../inc/Chrono.h"
 
 Chrono::Chrono()
 {

@@ -1,6 +1,6 @@
 #include <time.h>
 #include <iostream>
-#include "../inc/timespec.hpp"
+#include "../inc/timespec.h"
 
 
 double timespec_to_ms(const timespec& time_ts)

@@ -4,8 +4,8 @@
 #include <time.h>
 #include <signal.h>
 #include <iostream>
-#include "../inc/timespec.hpp"
-#include "../inc/Timer.hpp"
+#include "../inc/timespec.h"
+#include "../inc/Timer.h"
 
 class Calibrator;
 class Looper

@@ -6,7 +6,7 @@
 #include <vector>
 #include <condition_variable>
 #include "../inc/Mutex.hpp"
-#include "../inc/timespec.hpp"
+#include "../inc/timespec.h"
 
 
 

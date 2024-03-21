@@ -6,7 +6,7 @@
 #include <iostream>
 #include <vector>
 #include <cfloat>
-#include "../inc/timespec.hpp"
+#include "../inc/timespec.h"
 
 
 class Timer

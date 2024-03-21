@@ -6,8 +6,8 @@
 #include <iostream>
 #include <vector>
 #include <cfloat>
-#include "../inc/Timer.hpp"
-#include "../inc/timespec.hpp"
+#include "../inc/Timer.h"
+#include "../inc/timespec.h"
 
 
 // =========================================
