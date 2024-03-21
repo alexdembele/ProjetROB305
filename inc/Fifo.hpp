@@ -43,6 +43,7 @@ T Fifo<T>::pop()
     }
     T element = elements.front();
     elements.pop();
+    std::cout << "Taille de la fifo : " << elements.size() << std::endl;
     return element;
 }
 
@@ -64,6 +65,7 @@ T Fifo<T>::pop(double timeout_ms)
 
     T element = elements.front();
     elements.pop();
+    std::cout << "Taille de la fifo : " << elements.size() << std::endl;
     return element;
 }
 
