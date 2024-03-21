@@ -30,11 +30,7 @@ class TimeoutException : public std::runtime_error
         TimeoutException() : std::runtime_error("Timeout occurred while waiting for lock") {}
 };
 
-class EmptyException : public std::out_of_range
-{
-    public:
-        EmptyException() : std::out_of_range("Fifo is empty") {}
-};
+
 
 class Mutex::Monitor
 {
