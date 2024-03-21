@@ -5,7 +5,9 @@
 #include <string>
 #include <pthread.h>
 #include <vector>
+#include <sched.h> // For scheduling policies
 #include "../inc/timespec.h"
+
 
 struct Data 
 {
@@ -17,7 +19,7 @@ struct Data
 
 void incr(unsigned long nLoops, double* pCounter,pthread_mutex_t* mutex, bool protection)
 {
-    //verification du fonctionnement en mutex ou non
+    // Verification of mutex functionality
     if(protection)
     {
         for(unsigned int u=0; u< nLoops; u++)
@@ -45,29 +47,30 @@ void* call_incr(void* v_data)
 
 int main(int argc, char* argv[])
 {
-    bool protec; //determine le mode de fonctionnement
-    if (argc != 4 && argc !=3) 
+    bool protec = true; // Determine the operation mode
+    if (argc != 4) 
     {
-        std::cerr << "Usage: " << argv[0] << " <nombre_entier> <nombre de tâche> (<protected>)" << std::endl;
+        std::cerr << "Usage: " << argv[0] << " <nombre_entier> <nombre de tâche> <scheduling_policy>" << std::endl;
         return 1;
     }
-    if(argc== 4)
+
+    if(std::strcmp(argv[3], "SCHED_RR") == 0)
     {
-        if(std::strcmp(argv[3], "protected") == 0)
-        {
-            std::cout << "Fonctionnement avec Mutex" << std::endl;
-            protec=true;
-        }
-        else
-        {
-            std::cout << "Fonctionnement sans Mutex" << std::endl;
-            protec=false;
-        }
+        std::cout << "Scheduling policy: SCHED_RR" << std::endl;
+        struct sched_param schedParam;
+        schedParam.sched_priority = sched_get_priority_max(SCHED_RR);
+        pthread_setschedparam(pthread_self(), SCHED_RR, &schedParam);
+    }
+    else if(std::strcmp(argv[3], "SCHED_FIFO") == 0)
+    {
+        std::cout << "Scheduling policy: SCHED_FIFO" << std::endl;
+        struct sched_param schedParam;
+        schedParam.sched_priority = sched_get_priority_max(SCHED_FIFO);
+        pthread_setschedparam(pthread_self(), SCHED_FIFO, &schedParam) ;
     }
     else
     {
-        std::cout << "Fonctionnement sans Mutex" << std::endl;
-        protec=false;
+        std::cout << "Scheduling policy: SCHED_OTHER (default)" << std::endl;
     }
     
     unsigned long nLoops = (unsigned long)std::atoi(argv[1]);
@@ -88,10 +91,10 @@ int main(int argc, char* argv[])
     timespec b = timespec_now();
     timespec c =b-a;
 
-    double temps_exec = timespec_to_ms(c)/1000; //on divise par 1000 pour cenvertir en s
+    double temps_exec = timespec_to_ms(c)/1000; // Dividing by 1000 to convert to seconds
 
-    std::cout << "Valeur finale du counter : " << data.counter << std::endl;
-    std::cout << "temps d'exécution : " << temps_exec<< " s" << std::endl;
+    std::cout << "Final value of the counter: " << data.counter << std::endl;
+    std::cout << "Execution time: " << temps_exec << " s" << std::endl;
 
-    return 0 ;
+    return 0;
 }
