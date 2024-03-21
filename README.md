@@ -13,35 +13,30 @@ mkdir build
 cd build  
 
 Compiler les programmes dont vous avez besoins dans le build  
-Compilation avec g++ ../projetROB305/(*).cpp -lrt -lpthread  
+Compilation avec g++ ../projetROB305/TD__/*.cpp -lrt -lpthread  
 
 ***Description des codes***
+
+- -> Pour le code associé à un TD, lire le READ_ME associé
 
 - timespec.cpp contient des méthodes pour gérer de manière plus pratique les temps timespec de posix. 
 
 - Timer.cpp contient les méthodes de la classe Timer  
 
-- Mutex.cpp contient une classe reprenant les fonctionnalités des Mutex Posix et des classes dérivés permettant de supervisé et locké les mutex.  Il y a aussi une implémentation de la clsse Sémaphore
+- Mutex.cpp contient une classe reprenant les fonctionnalités des Mutex Posix et des classes dérivés permettant de supervisé et locké les mutex.  Il y a aussi une implémentation de la classe Sémaphore.
 
-- PosixThread.cpp contient les méthodes reprenant les fonctionnalités des Thread Posix . (Elle n'a pas l'air fonctionnelle sur les temps d'exécution)
+- Fifo.cpp contient les méthodes pour la classe Fifo
 
-- p_thread.cpp est une implémentation basique d'un thread en parallèle.  
+- PosixThread.cpp contient les méthodes reprenant les fonctionnalités des Thread Posix . 
 
-- cpuTest.cpp implémente une sorte de multi-threading avec ou sans mutex. 
+- Chrono.cpp contient les méthodes de la classe Chrono
 
-- TD1a.cpp fait une série de test basique sur les fonctions sur les timespecs.
+- Inversion.cpp implémente une classe dérivé de Thread qui permettrait de tester l'inversion de priorité. 
 
-- TD1b.cpp implémente un simple compteur avec une fréquence 2Hz avec posix.
+- cpuLoop contient des codes pour les méthodes de Calibration de temps et d'exécution de boucle de comptage avec la classe Looper
 
-- TD3a.cpp test la classe Chrono et permet de le faire sur une mesure de 1s. 
+- 
 
-- TD3b.cpp implémente un test de la classe Timer sur un compteur décrémental.
-
-- TD4a.cpp implémente des tests sur la classe Thread. On remarque avec ce code qu'il y a un problème.
-
-- TD4b.cpp reprend cpuTest.cpp mais avec nos classe de Mutex
-
-- TD4c.cpp implémente un test simple d'échange de jeton avec la classe Sémaphore
 
 ***Execution code***
 
