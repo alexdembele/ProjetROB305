@@ -70,11 +70,9 @@ int main()
     t3.tv_nsec = 0;
     t3 += t1;
     assert(t3.tv_sec == 4 && t3.tv_nsec == 0);
-
     t3 -= t1;
     assert(t3.tv_sec == 1 && t3.tv_nsec == 0);
 
     std::cout << "Tous les tests ont réussis!\n";
-
     return 0 ;
 }

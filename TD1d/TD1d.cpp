@@ -8,6 +8,7 @@
 #include <climits>
 #include "../inc/timespec.h"
 
+volatile bool pStop = 0;
 struct Data 
 {
     volatile double  counter;
@@ -64,7 +65,7 @@ void* call_timer(void* v_data)
 void calib(double* a, double* b)
 {
     unsigned long nLoops = (unsigned long)UINT_MAX;
-    bool pStop = false;
+    pStop = false;
     pthread_t incrementThread;
     pthread_t timerThread;
     //premiere mesure

@@ -8,6 +8,7 @@
 #include <climits>
 #include "../inc/timespec.h"
 
+volatile bool pStop;
 struct Data 
 {
     volatile double  counter;
@@ -59,7 +60,7 @@ void* call_timer(void* v_data)
 void calib1(double* temps_exec, double* nombreLoops, double duration_ms)
 {
     unsigned long nLoops = (unsigned long)UINT_MAX;
-    bool pStop = false;
+    pStop = false;
     pthread_t incrementThread;
     pthread_t timerThread;
     //premiere mesure
@@ -78,6 +79,7 @@ void calib1(double* temps_exec, double* nombreLoops, double duration_ms)
     *temps_exec = timespec_to_ms(duree);
     *nombreLoops = data.counter;
 }
+
 // =========================================
 // Classe Fonction utiles pour la regression linéaire
 // =========================================
@@ -157,8 +159,5 @@ int main()
     temps_exec = timespec_to_ms(duree);
     std::cout << "Temps d'execution : "<< temps_exec <<"ms" <<std::endl;
     std::cout << "Valeur du compteur : "<< data.counter <<"ms" <<std::endl;
-
-
-
     return 0 ;
 }

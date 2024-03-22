@@ -15,6 +15,8 @@ cd build
 Compiler les programmes dont vous avez besoins dans le build  
 Compilation avec g++ ../projetROB305/TD__/*.cpp -lrt -lpthread  
 
+Le dossier inc contient les headers, le dossier src contient les cpp associés aux headers pour les méthodes de classes. Les dossier TD__ contiennent tous les codes nécessaires pour réaliser un TD. Un même code est donc présent plusieurs fois dans ce repos, c'est pour des simplications de compilations. 
+
 ***Description des codes***
 
 - -> Pour le code associé à un TD, lire le READ_ME associé
@@ -25,7 +27,7 @@ Compilation avec g++ ../projetROB305/TD__/*.cpp -lrt -lpthread
 
 - Mutex.cpp contient une classe reprenant les fonctionnalités des Mutex Posix et des classes dérivés permettant de supervisé et locké les mutex.  Il y a aussi une implémentation de la classe Sémaphore.
 
-- Fifo.cpp contient les méthodes pour la classe Fifo
+- Fifo.hpp contient les méthodes pour la classe Fifo
 
 - PosixThread.cpp contient les méthodes reprenant les fonctionnalités des Thread Posix . 
 
@@ -35,21 +37,12 @@ Compilation avec g++ ../projetROB305/TD__/*.cpp -lrt -lpthread
 
 - cpuLoop contient des codes pour les méthodes de Calibration de temps et d'exécution de boucle de comptage avec la classe Looper
 
-- 
+- Les headers associés sont les .hpp dans le dossier inc
 
 
 ***Execution code***
 
-- TD3b.cpp : "./nom_du_fichier (int : nombre_de_seconde)" il est possible de spécifier le nombre de seconde du decompte, il est à 10 par défaut  
-
-- p_thread.cpp : "./nom_du_fichier"
-
-- cpuTest.cpp : "./nom_du_fichier   int : compteur    int : nombre_de_thread    (char : "protected")" il faut écrire exactement protected pour activer le mutex
-
-- TD4b.cpp : comme cputest.cpp
-
-- Tous les autres TD**.cpp : "./nom_du_fichier"
-  
+- Pour exécuter un code, il faut en général faire ./a.out, certains TD nécessitent de rajouter des paramètres. Lorsque c'est le cas c'est précisé dans le README associé. 
 
   
 

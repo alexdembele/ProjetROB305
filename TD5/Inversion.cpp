@@ -6,7 +6,9 @@
 #include "../inc/cpuLoop.h"
 #include "../inc/Inversion.h"
 
-
+// =========================================
+// Classe Thread ABC
+// =========================================
 ThreadABC::ThreadABC(char * name,int beginTime_tick,int execTime_tick,int delayTime_tick,int mutexTime_tick,Mutex& mtx): beginTime_tick(beginTime_tick),execTime_tick(execTime_tick),delayTime_tick(delayTime_tick),mutexTime_tick(mutexTime_tick),mtx(mtx),name(name)
 { 
     counter =0;
@@ -15,10 +17,9 @@ ThreadABC::ThreadABC(char * name,int beginTime_tick,int execTime_tick,int delayT
     CpuLoop myLooper(myCalibration);
    
 }
+
 void ThreadABC::run()
 {
-    
-    
     //pause avant de commencer le thread
     timespec_wait(timespec_from_ms(100*beginTime_tick));
 
@@ -37,5 +38,22 @@ void ThreadABC::run()
     if (mutexTime_tick*2 < execTime_tick)
     {
         myLooper.runTime(100*(execTime_tick-2*mutexTime_tick));
+    }
+}
+
+// =========================================
+// Classe ThreadSurchargeCpu
+// =========================================
+
+ThreadSurchargeCpu::ThreadSurchargeCpu()
+{
+    counter=0;
+}
+
+void ThreadSurchargeCpu::run()
+{
+    for(int i=0; i<UINT_MAX;i++)
+    {
+        counter++;
     }
 }

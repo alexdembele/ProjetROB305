@@ -32,10 +32,10 @@ int main()
     struct sigevent sev;
     timer_t timerid;
     struct itimerspec its;
-
     sa.sa_flags = SA_SIGINFO;
     sa.sa_sigaction = timer_handler;
     sigemptyset(&sa.sa_mask);
+    
     if (sigaction(SIGALRM, &sa, NULL) == -1) 
     {
         perror("sigaction");
@@ -45,6 +45,7 @@ int main()
     sev.sigev_notify = SIGEV_SIGNAL;
     sev.sigev_signo = SIGALRM;
     sev.sigev_value.sival_ptr = &timerid;
+
     if (timer_create(CLOCK_REALTIME, &sev, &timerid) == -1)
     {
         perror("timer_create");

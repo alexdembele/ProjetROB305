@@ -28,4 +28,14 @@ class ThreadABC : public Thread
         ThreadABC(char* name,int beginTime_tick,int execTime_tick,int delayTime_tick,int mutexTime_tick,Mutex& mtx);
 };
 
+class ThreadSurchargeCpu : public Thread
+{
+    private:
+        int counter;
+    protected:
+        void run() override;
+    public:
+        ThreadSurchargeCpu();
+};
+
 #endif
