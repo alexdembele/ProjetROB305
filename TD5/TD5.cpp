@@ -18,6 +18,10 @@ int main()
     ThreadSurchargeCpu surcharge3;
 
     //Assignation des priorité
+    surcharge1.setScheduling(SCHED_RR,1);
+    surcharge2.setScheduling(SCHED_RR,1);
+    surcharge3.setScheduling(SCHED_RR,1);
+
     A.setScheduling(SCHED_RR,32);
     B.setScheduling(SCHED_RR,33);
     C.setScheduling(SCHED_RR,34);
@@ -28,8 +32,6 @@ int main()
     surcharge3.start();
 
     //Execution
-
-    
     A.start();
     B.start();
     C.start();
