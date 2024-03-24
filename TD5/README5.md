@@ -9,7 +9,7 @@ Dans le dossier build : ./a.out
 
 ***Rendu des TDs***
 
-    Ce programme n'a pas aboutit. 
+    Ce programme n'a pas aboutit. Mais les briques de bases sont faites.
 
 
     

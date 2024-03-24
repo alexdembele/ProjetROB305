@@ -9,7 +9,7 @@ Dans le dossier build : ./a.out
 
 ***Rendu des TDs***
 
-    On fait la même chose que l'exercice précédent mais avec une Fifo. 
+    On fait la même chose que l'exercice précédent mais avec une Fifo. Ici, il y a dès fois de problème de Fifo vide, mais l'exception est bien envoyé. 
 
 
     
